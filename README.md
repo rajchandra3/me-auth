@@ -23,3 +23,7 @@ What data does the app provide:
 
 2. It also sets a userdata object with basic user information
 3. Alternatively, you can use `atob` to descypt the _jwt token_
+
+This app uses the following libraries:
+- Bootstrap
+- Google Oauth

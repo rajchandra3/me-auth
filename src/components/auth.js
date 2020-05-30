@@ -51,6 +51,7 @@ const loginUsingGoogle = (raw)=>{
 
 const onSuccess = (googleUser)=> {
 //   console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+    document.querySelector('.username').innerHTML = `${googleUser.getBasicProfile().getName()}(${googleUser.getBasicProfile().getEmail()})`;
     if(!Store.getItem('userData')){
         const raw = gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse().id_token;
         const data = {
@@ -59,7 +60,9 @@ const onSuccess = (googleUser)=> {
         loginUsingGoogle(data);
     }else{
         let redirect_url=getQueryParams(location.href).redirect_url;
-        location.href=redirect_url || Config.urls.base_url;
+        // location.href=redirect_url || Config.urls.base_url;
+        document.querySelector('.redirect_btn').innerHTML = 
+            `<a class="btn btn-primary" href="${redirect_url || Config.urls.base_url}">Go Back to ${redirect_url || Config.urls.base_url}</a>`
         console.log('userdata is available!')
     }
 }
@@ -70,9 +73,9 @@ const renderButton = ()=> {
   gapi.signin2.render('g-signin-btn', {
     'scope': 'profile email',
     'width': 240,
-    'height': 50,
+    'height': 40,
     'longtitle': true,
-    'theme': 'dark',
+    'theme': 'light',
     'onsuccess': onSuccess,
     'onfailure': onFailure
   });
@@ -83,4 +86,4 @@ window.onload=()=>{
 }
 
 // document.getElementById('g-signin-btn').addEventListener('click',onSignIn);
-// document.getElementById('g-signout-btn').addEventListener('click',signOut);
+document.querySelector('.google-logout-btn').addEventListener('click',signOut);
