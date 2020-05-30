@@ -111,4 +111,18 @@ window.onload=()=>{
 // document.getElementById('g-signin-btn').addEventListener('click',onSignIn);
 document.querySelector('.google-logout-btn').addEventListener('click',signOut);
 
+//register service worker
+
+// register service worker
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', ()=> {
+        navigator.serviceWorker.register('/service_worker.js').then((registration)=> {
+            // Registration was successful
+            console.log('ServiceWorker registration successful with scope: ', registration.scope);
+        }, (err)=> {
+            // registration failed :(
+            console.log('ServiceWorker registration failed: ', err);
+        });
+    });
+}
 
