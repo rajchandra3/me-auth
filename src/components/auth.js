@@ -83,7 +83,32 @@ const renderButton = ()=> {
 
 window.onload=()=>{
     renderButton();
+    const isLoggedIn = Cookie.checkCookie();
+    console.log('isloggedIn', isLoggedIn)
+    if(isLoggedIn){
+        let loggedin_elements = document.querySelectorAll('.loggedin');
+        for(let ele of loggedin_elements) {
+            ele.style.display='block';
+        }
+
+        let loggedout_elements = document.querySelectorAll('.logged-out');
+        for(let ele of loggedout_elements) {
+            ele.style.display='none';
+        }
+    }else{
+        let loggedin_elements = document.querySelectorAll('.loggedin');
+        for(let ele of loggedin_elements) {
+            ele.style.display='none';
+        }
+
+        let loggedout_elements = document.querySelectorAll('.logged-out');
+        for(let ele of loggedout_elements) {
+            ele.style.display='block';
+        }
+    }
 }
 
 // document.getElementById('g-signin-btn').addEventListener('click',onSignIn);
 document.querySelector('.google-logout-btn').addEventListener('click',signOut);
+
+

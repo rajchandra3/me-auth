@@ -8,6 +8,7 @@ const cookieName = 'me_apps_access_token';
  * @param {Number} exp_days expires in x number of days
  */
 const setCookie = (cname,cvalue,exp_days) =>{
+  console.log('was here')
     let d = new Date();
     d.setTime(d.getTime() + (exp_days*24*60*60*1000));
     let expires = `expires=${d.toGMTString()}`;

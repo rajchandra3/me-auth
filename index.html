@@ -17,23 +17,20 @@
 <body>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-12 d-flex flex-column bd-highlight" style="height: 100%;">
+            <div class="col-lg-12 d-flex flex-column bd-highlight">
                 <header class="h4 text-center mt-5">One Authentication App</header>
                 <p class="text-center">After authentication you will be redirected back to your app</p>
-                <div class="text-center d-flex justify-content-center mt-4 mb-4"><span id="g-signin-btn"></span> </div>
-                <div class="redirect_btn text-center"></div>
-                <div class="text-center"><button type="button" class="btn btn-light google-logout-btn mt-4 mb-4" >
-                    You are logged in as <span class="username">rajchandra</span>, logout?
+                <div class="text-center d-flex justify-content-center mt-4 mb-4 logged-out"><span id="g-signin-btn"></span> </div>
+                <div class="redirect_btn text-center loggedin"></div>
+                <div class="text-center loggedin"><button type="button" class="btn btn-light google-logout-btn mt-4 mb-4" >
+                    You are logged in as <span class="username"></span>, logout?
                 </button></div>
+                <p class="text-center logged-out text-secondary"><small><b>Disclaimer</b>: By logging in, you will submit your basic profile which consists of email, name and your profile picture.</small></p>
             </div>
-            <!-- footer -->
-            <div class="col-lg-12 common-footer-container bg-dark mt-5"></div>
         </div>
     </div>
     <!-- import js files -->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script type="module" src="/src/components/auth.js"></script>
-    <script type="module" src="https://files.rajchandra.me/js/config.js"></script>
-    <script type="text/javascript" src="https://files.rajchandra.me/js/footer.js"></script>
 </body>
 </html>
