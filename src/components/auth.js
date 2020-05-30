@@ -9,7 +9,11 @@ const signOut = () => {
     googleAuth.signOut().then(function () {
         Store.empty();
         Cookie.removeCookie(Cookie.cookieName);
-        location.reload();
+        Cookie.removeCookie(Cookie.userDataCookieName);
+        let redirect_url=getQueryParams(location.href).redirect_url;
+        redirect_url?
+        location.href=redirect_url:
+        null;
     });
 }
 const getQueryParams = (url) => {
@@ -36,7 +40,7 @@ const loginUsingGoogle = (raw)=>{
         const data=response.data;
         if(data.code===0){
             Cookie.setCookie(Cookie.cookieName,data.cookies.access_token,999);
-            Store.setItem('userData',data.userData);
+            Cookie.setCookie(Cookie.userDataCookieName,window.btoa(JSON.stringify(data.userData)),999);
             let redirect_url=getQueryParams(location.href).redirect_url;
             redirect_url?
             location.href=redirect_url:
@@ -52,9 +56,10 @@ const loginUsingGoogle = (raw)=>{
 
 
 const onSuccess = (googleUser)=> {
-//   console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+    const shouldLogout = Boolean(getQueryParams(location.href).logout || false);
+    shouldLogout?signOut():null;
     document.querySelector('.username').innerHTML = `${googleUser.getBasicProfile().getName()}(${googleUser.getBasicProfile().getEmail()})`;
-    if(!Store.getItem('userData')){
+    if(!Cookie.checkCookie(Cookie.userDataCookieName)){
         const raw = gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse().id_token;
         const data = {
             id_token: raw
@@ -87,8 +92,7 @@ const renderButton = ()=> {
 
 window.onload=()=>{
     renderButton();
-    const isLoggedIn = Cookie.checkCookie();
-    console.log('isloggedIn', isLoggedIn)
+    const isLoggedIn = Cookie.checkCookie(Cookie.userDataCookieName) && Cookie.checkCookie('me_apps_access_token');
     if(isLoggedIn){
         let loggedin_elements = document.querySelectorAll('.loggedin');
         for(let ele of loggedin_elements) {
@@ -120,7 +124,7 @@ document.querySelector('.google-logout-btn').addEventListener('click',signOut);
 // register service worker
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', ()=> {
-        navigator.serviceWorker.register('/service_worker.js').then((registration)=> {
+        navigator.serviceWorker.register('/serviceWorker.js').then((registration)=> {
             // Registration was successful
             console.log('ServiceWorker registration successful with scope: ', registration.scope);
         }, (err)=> {

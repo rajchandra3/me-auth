@@ -1,6 +1,7 @@
 import Config from './config.js';
 
 const cookieName = 'me_apps_access_token';
+const userDataCookieName = 'me_apps_user';
 /**
  * Set cookie 
  * @param {String} cname cookie name
@@ -8,7 +9,6 @@ const cookieName = 'me_apps_access_token';
  * @param {Number} exp_days expires in x number of days
  */
 const setCookie = (cname,cvalue,exp_days) =>{
-  console.log('was here')
     let d = new Date();
     d.setTime(d.getTime() + (exp_days*24*60*60*1000));
     let expires = `expires=${d.toGMTString()}`;
@@ -31,8 +31,8 @@ const getCookie = (cname)=> {
     return "";
 }
   
-const checkCookie = ()=> {
-    let user=getCookie(cookieName);
+const checkCookie = (name)=> {
+    let user=getCookie(name);
     if (user != "") {
         return true;
     } else {
@@ -44,4 +44,4 @@ const removeCookie = (cname) => {
     document.cookie = `${cname}= ;expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;domain=${Config.env==='production'?'rajchandra.me':'localhost'}`;
 }
 
-export default {cookieName, getCookie, setCookie, checkCookie, removeCookie}
+export default {cookieName, userDataCookieName, getCookie, setCookie, checkCookie, removeCookie}

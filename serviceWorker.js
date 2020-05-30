@@ -9,31 +9,31 @@
 
 // To learn more about the benefits of this model and instructions on how to
 // opt-in, read https://bit.ly/CRA-PWA
-import Config from './src/config.js';
-
 const isLocalhost = Boolean(
-    window.location.hostname === 'localhost' ||
+    this.location.hostname === 'localhost' ||
       // [::1] is the IPv6 localhost address.
-      window.location.hostname === '[::1]' ||
+      this.location.hostname === '[::1]' ||
       // 127.0.0.0/8 are considered localhost for IPv4.
-      window.location.hostname.match(
+      this.location.hostname.match(
         /^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/
       )
   );
+
+const PUBLIC_URL = isLocalhost?'http://localhost:5500':'https://auth.rajchandra.me';
   
-  export function register(config) {
-    if (Config.env === 'production' && 'serviceWorker' in navigator) {
+  function register(config) {
+    if (NODE_ENV === 'production' && 'serviceWorker' in navigator) {
       // The URL constructor is available in all browsers that support SW.
-      const publicUrl = new URL(Config.urls.base_url, window.location.href);
-      if (publicUrl.origin !== window.location.origin) {
+      const publicUrl = new URL(PUBLIC_URL, this.location.href);
+      if (publicUrl.origin !== this.location.origin) {
         // Our service worker won't work if PUBLIC_URL is on a different origin
         // from what our page is served on. This might happen if a CDN is used to
         // serve assets; see https://github.com/facebook/create-react-app/issues/2374
         return;
       }
   
-      window.addEventListener('load', () => {
-        const swUrl = `${Config.urls.base_url}/service-worker.js`;
+      this.addEventListener('load', () => {
+        const swUrl = `${PUBLIC_URL}/service-worker.js`;
   
         if (isLocalhost) {
           // This is running on localhost. Let's check if a service worker still exists or not.
@@ -108,7 +108,7 @@ const isLocalhost = Boolean(
           // No service worker found. Probably a different app. Reload the page.
           navigator.serviceWorker.ready.then(registration => {
             registration.unregister().then(() => {
-              window.location.reload();
+              this.location.reload();
             });
           });
         } else {
@@ -121,7 +121,7 @@ const isLocalhost = Boolean(
       });
   }
   
-  export function unregister() {
+  function unregister() {
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.ready
         .then(registration => {
