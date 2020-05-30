@@ -38,7 +38,9 @@ const loginUsingGoogle = (raw)=>{
             Cookie.setCookie(Cookie.cookieName,data.cookies.access_token,999);
             Store.setItem('userData',data.userData);
             let redirect_url=getQueryParams(location.href).redirect_url;
-            location.href=redirect_url || Config.urls.base_url;
+            redirect_url?
+            location.href=redirect_url:
+            location.reload();
         }else{
             //error
             console.log(data);
@@ -60,7 +62,9 @@ const onSuccess = (googleUser)=> {
         loginUsingGoogle(data);
     }else{
         let redirect_url=getQueryParams(location.href).redirect_url;
-        // location.href=redirect_url || Config.urls.base_url;
+        redirect_url?
+        location.href=redirect_url:
+        null;
         document.querySelector('.redirect_btn').innerHTML = 
             `<a class="btn btn-primary" href="${redirect_url || Config.urls.base_url}">Go Back to ${redirect_url || Config.urls.base_url}</a>`
         console.log('userdata is available!')
