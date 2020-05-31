@@ -59,7 +59,8 @@ const onSuccess = (googleUser)=> {
     const shouldLogout = Boolean(getQueryParams(location.href).logout || false);
     shouldLogout?signOut():null;
     document.querySelector('.username').innerHTML = `${googleUser.getBasicProfile().getName()}(${googleUser.getBasicProfile().getEmail()})`;
-    if(!Cookie.checkCookie(Cookie.userDataCookieName)){
+    if(!Cookie.checkCookie(Cookie.userDataCookieName) 
+    && !Cookie.checkCookie(Cookie.cookieName)){
         const raw = gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse().id_token;
         const data = {
             id_token: raw

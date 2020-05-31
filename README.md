@@ -2,7 +2,7 @@
 
 To make authentication easy we will be using one app login 
 
-### Steps to accomplish this 
+#### Steps to login/signup
 1. When the user clicks on login/signup, take the user to 
 
     API
@@ -19,10 +19,13 @@ To make authentication easy we will be using one app login
 
 What data does the app provide:
 
-1. It sets a cookie `me_apps_access_token` with the **jwt** cookie
+1. It sets two cookie `me_apps_access_token` and `me_apps_user` with the **jwt** cookie and encoded userData
 
-2. It also sets a userdata object with basic user information
-3. Alternatively, you can use `atob` to descypt the _jwt token_
+2. The userdata object with basic user information are available on `localstorage` and `cookie`
+
+3. You can use `atob` to descypt the `me_apps_user`
+
+4. There is a problem with localstorage, you can't access them in subdomains
 
 This app uses the following libraries:
 - Bootstrap
