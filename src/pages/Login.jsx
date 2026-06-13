@@ -52,6 +52,12 @@ export default function Login() {
         <div className="seal-wrap">
           <div className="seal">
             <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" className="seal-svg">
+              <defs>
+                <linearGradient id="sealGrad" x1="10" y1="4" x2="54" y2="60" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stopColor="#818cf8" />
+                  <stop offset="100%" stopColor="#a78bfa" />
+                </linearGradient>
+              </defs>
               {/* Hexagonal border */}
               <path
                 d="M32 4 L54 17 L54 47 L32 60 L10 47 L10 17 Z"
@@ -65,33 +71,15 @@ export default function Login() {
                 d="M32 10 L50 20.5 L50 43.5 L32 54 L14 43.5 L14 20.5 Z"
                 stroke="url(#sealGrad)"
                 strokeWidth="0.75"
-                strokeOpacity="0.4"
+                strokeOpacity="0.3"
                 fill="none"
                 strokeLinejoin="round"
               />
-              {/* R monogram */}
-              <text
-                x="32"
-                y="39"
-                textAnchor="middle"
-                fontFamily="'Inter', system-ui, sans-serif"
-                fontWeight="700"
-                fontSize="22"
-                fill="url(#textGrad)"
-                letterSpacing="-1"
-              >
-                RC
-              </text>
-              <defs>
-                <linearGradient id="sealGrad" x1="10" y1="4" x2="54" y2="60" gradientUnits="userSpaceOnUse">
-                  <stop offset="0%" stopColor="#818cf8" />
-                  <stop offset="100%" stopColor="#a78bfa" />
-                </linearGradient>
-                <linearGradient id="textGrad" x1="14" y1="20" x2="50" y2="44" gradientUnits="userSpaceOnUse">
-                  <stop offset="0%" stopColor="#c4b5fd" />
-                  <stop offset="100%" stopColor="#818cf8" />
-                </linearGradient>
-              </defs>
+              {/* Abstract key icon */}
+              <circle cx="27" cy="26" r="7" stroke="url(#sealGrad)" strokeWidth="2" fill="none" />
+              <line x1="32" y1="30" x2="44" y2="42" stroke="url(#sealGrad)" strokeWidth="2" strokeLinecap="round" />
+              <line x1="40" y1="38" x2="40" y2="44" stroke="url(#sealGrad)" strokeWidth="2" strokeLinecap="round" />
+              <line x1="44" y1="38" x2="44" y2="42" stroke="url(#sealGrad)" strokeWidth="2" strokeLinecap="round" />
             </svg>
             <div className="seal-glow" />
           </div>
@@ -138,7 +126,7 @@ export default function Login() {
 
             {/* Footer text */}
             <p className="login-footer">
-              Your unified identity for all rajchandra.me services
+              Your unified identity for all connected services
             </p>
           </div>
         </div>
@@ -149,7 +137,7 @@ export default function Login() {
             <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
             <path d="M7 11V7a5 5 0 0 1 10 0v4" />
           </svg>
-          Secured by Raj Chandra Identity Platform
+          Protected by Identity Platform v2
         </div>
       </div>
     </div>
